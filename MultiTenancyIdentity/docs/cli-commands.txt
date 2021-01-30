@@ -1,0 +1,18 @@
+dotnet new sln --name MultiTenancyIdentity
+dotnet new mvc --auth Individual --name MultiTenancyIdentity.MVC -f netcoreapp3.1
+dotnet sln add .\src\MultiTenancyIdentity.MVC\MultiTenancyIdentity.MVC.csproj
+
+--dotnet add package Microsoft.EntityFrameworkCore.Design --version 3.1.11
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 3.1.10
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 3.1.4
+
+dotnet ef migrations add InitialMigration -o Data/Migrations --verbose
+dotnet ef database update --verbose
+
+dotnet tool install -g dotnet-aspnet-codegenerator --version 3.1.4
+dotnet aspnet-codegenerator identity -dc MultiTenancyIdentity.MVC.Data.ApplicationDbContext
+
+
+Obs.: criar o scaffold do identity em um projeto separado para teste, referencia:
+https://docs.microsoft.com/pt-br/aspnet/core/security/authentication/scaffold-identity?view=aspnetcore-3.1&tabs=netcore-cli
+

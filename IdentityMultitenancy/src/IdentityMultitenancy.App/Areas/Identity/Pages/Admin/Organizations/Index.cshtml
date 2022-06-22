@@ -1,0 +1,35 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Organizations";
+    ViewData["ActivePage"] = ManageNavPages.Organization;
+}
+
+<h3>@ViewData["Title"]</h3>
+
+<br>
+<a asp-page="Create" class="btn btn-sm btn-primary">Create New</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Organizations[0].Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Organizations)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-page="Edit" class="btn btn-sm btn-primary" asp-route-organizationId="@item.Id">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

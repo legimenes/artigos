@@ -1,0 +1,25 @@
+# Estrutura de projeto
+
+dotnet new sln --name IdentityMultitenancy
+dotnet new mvc --name IdentityMultitenancy.App -f net6.0
+dotnet sln add .\src\IdentityMultitenancy.App\IdentityMultitenancy.App.csproj
+
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design -v 6.0.5
+dotnet add package Microsoft.EntityFrameworkCore.Design -v 6.0.5
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer -v 6.0.5
+dotnet add package Microsoft.EntityFrameworkCore.Tools -v 6.0.5
+dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore -v 6.0.5
+dotnet add package Microsoft.AspNetCore.Identity.UI -v 6.0.5
+
+dotnet aspnet-codegenerator identity -dc IdentityMultitenancy.App.Data.ApplicationDbContext
+
+# Entity Framework Core
+
+dotnet ef migrations add Initial -o Migrations --verbose
+dotnet ef database update --verbose
+
+
+https://codewithmukesh.com/blog/user-management-in-aspnet-core-mvc/
+
+TODO:
+(1) Gerenciamento de Organizacoes
